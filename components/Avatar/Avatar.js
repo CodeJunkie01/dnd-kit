@@ -8,27 +8,36 @@ const AvatarDraggable = ({ children, id, index }) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
   });
-  const [user, setUser] = useState(()=>{
-    const x = users.find(user=>user.id === id);
+  const [user, setUser] = useState(() => {
+    const x = users.find((user) => user.id === id);
+    if (x === undefined) {
+      console.log("no user foung for id: " + id);
+    }
     return x;
-  })
+  });
   const style = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-        margin: "5px", 
-        
+        margin: "5px",
+        zIndex: "100",
       }
-    : {margin: "5px"};
+    : {
+        margin: "5px",
+        zIndex: "100",
+      };
 
-    
   return (
     <Avatar
-      src={user.avatarSource}
+      src={user?.avatarSource}
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
-      sx={{borderColor:"white", border:1, boxShadow: 1, width:50, height:50, left:250-80*index, top:-30, position: "relative" }}
+      sx={{
+        boxShadow: 20,
+        width: 100,
+        height: 100,
+      }}
     >
       {children}
     </Avatar>

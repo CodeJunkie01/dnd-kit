@@ -3,36 +3,68 @@ import { useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
 import AvatarDraggable from "../Avatar/Avatar";
 import { borderRadius, height } from "@mui/system";
+import { useMemo } from "react";
 
-const AvatarField = ({avatars, children, id}) => {
-  
-  
+const AvatarField = ({ avatars, children, id }) => {
   const { isOver, setNodeRef } = useDroppable({
     id: id,
   });
+  const bgTexture = useMemo(() => determineTexture(id), []);
+  const texturePos = useMemo(() => {
+    return determineTexturePos();
+  }, []);
   const style = {
-    padding: 10,
-    boxShadow: isOver ? "10px 10px 10px grey": "none",
-    marginBottom: isOver ? "30px" : "40px",
-    marginLeft: "20px",
-    width: "300px",
-    backgroundColor: "lightgrey",
-    transition: 'boxShadow 1s ease-in-out',
+    width: "140px",
     display: "flex",
-    borderRadius: 5,
-    height: isOver? "140px" : "130px"
+    height: "140px",
+    position: "relative",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundImage: `url(${bgTexture})`,
+    backgroundPosition: texturePos,
   };
 
   return (
     <div ref={setNodeRef} style={style}>
-      
-      {avatars?.map((avatarId, index)=> {
-        return <AvatarDraggable id={avatarId} key={avatarId} index={index}>Drag Me</AvatarDraggable>
+      {avatars?.map((avatarId, index) => {
+        if (avatarId !== "") {
+          return (
+            <AvatarDraggable
+              id={avatarId}
+              key={avatarId}
+              index={index}
+            ></AvatarDraggable>
+          );
+        }
       })}
-      
-      
     </div>
   );
 };
 
+function determineTexture(id) {
+  const x = parseInt(Array.from(id)[0]) + 1;
+  const y = parseInt(Array.from(id)[1]) + 1;
+  const result = (y + (x % 2)) % 2;
+  if (result === 0) {
+    return "https://images.pexels.com/photos/450055/pexels-photo-450055.jpeg?auto=compress&cs=tinysrgb&w=1600";
+  } else {
+    return "https://images.pexels.com/photos/2824173/pexels-photo-2824173.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+  }
+}
+
+const determineTexturePos = () => {
+  const x = Math.floor(Math.random() * 5);
+  switch (x) {
+    case 0:
+      return "top";
+    case 1:
+      return "right";
+    case 2:
+      return "bottom";
+    case 3:
+      return "left";
+    default:
+      return "top";
+  }
+};
 export default AvatarField;
