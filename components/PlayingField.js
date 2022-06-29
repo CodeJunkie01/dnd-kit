@@ -85,7 +85,7 @@ export default function PlayingField() {
                   <div key={indexKey}>
                     <AvatarField
                       avatars={[cell]}
-                      id={`${y}${indexKey}`}
+                      id={`${y}${indexKey}`}4
                       key={`av${y}${indexKey}`}
                     ></AvatarField>
                   </div>
@@ -143,8 +143,8 @@ const field = [
     "rook_white_1",
     "knight_white_1",
     "bishop_white_1",
-    "queen_white_1",
     "king_white_1",
+    "queen_white_1",
     "bishop_white_2",
     "knight_white_2",
     "rook_white_2",
