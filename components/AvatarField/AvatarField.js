@@ -14,18 +14,20 @@ const AvatarField = ({ avatars, children, id }) => {
     return determineTexturePos();
   }, []);
   const style = {
-    width: "140px",
+    width: "10vh",
     display: "flex",
-    height: "140px",
+    height: "10vh",
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
     backgroundImage: `url(${bgTexture})`,
     backgroundPosition: texturePos,
-  };
+    border: "0px",
+  }
+  
 
   return (
-    <div ref={setNodeRef} style={style}>
+    <div ref={setNodeRef} style={style} >
       {avatars?.map((avatarId, index) => {
         if (avatarId !== "") {
           return (

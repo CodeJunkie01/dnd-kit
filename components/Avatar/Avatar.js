@@ -35,8 +35,8 @@ const AvatarDraggable = ({ children, id, index }) => {
       {...listeners}
       sx={{
         boxShadow: 20,
-        width: 100,
-        height: 100,
+        width: '9vh',
+        height: '9vh',
       }}
     >
       {children}

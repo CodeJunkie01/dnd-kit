@@ -2,7 +2,11 @@ import { display } from "@mui/system";
 import React, { useId } from "react";
 import { useState, useEffect } from "react";
 import AvatarField from "./AvatarField/AvatarField";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext,KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors, } from "@dnd-kit/core";
 import rules from "./rules";
 
 export default function PlayingField() {
@@ -59,6 +63,11 @@ export default function PlayingField() {
     updateUserPlacement({ x, y }, active.id);
   };
 
+  const markStartField = (event) => {
+    const {active} = event;
+    
+  }
+
   const style2 = {
     boxShadow: "30px 30px 30px rgba(0, 0, 0, 0.5)",
     margin: "50px",
@@ -74,8 +83,18 @@ export default function PlayingField() {
     margin: "100px",
   };
 
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+  const keyboardSensor = useSensor(KeyboardSensor);
+  
+  const sensors = useSensors(
+    mouseSensor,
+    touchSensor,
+    keyboardSensor,
+  );
+
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd} onDragStart={markStartField} sensors={sensors}>
       <div style={style3}>
         {playingField.map((row, y) => {
           return (
@@ -85,7 +104,7 @@ export default function PlayingField() {
                   <div key={indexKey}>
                     <AvatarField
                       avatars={[cell]}
-                      id={`${y}${indexKey}`}4
+                      id={`${y}${indexKey}`}
                       key={`av${y}${indexKey}`}
                     ></AvatarField>
                   </div>

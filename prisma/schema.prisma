@@ -21,6 +21,27 @@ model Post {
   authorId  Int
 }
 
+model ChessBoard {
+  id        Int      @id @default(autoincrement())
+  rows      Row[]
+}
+
+model Row {
+  id        Int         @id @default(autoincrement())
+  rowNumber Int
+  board     ChessBoard  @relation(fields: [boardId], references: [id])
+  cells     Cell[]
+  boardId   Int
+}
+
+model Cell {
+  id            Int         @id @default(autoincrement())
+  row           Row         @relation(fields: [rowId], references: [id])
+  columnNumber  Int
+  chessPiece    String      @db.VarChar(255)
+  rowId         Int
+}
+
 model Profile {
   id     Int     @id @default(autoincrement())
   bio    String?
