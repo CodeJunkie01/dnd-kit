@@ -125,7 +125,7 @@ const setupField = (field) => {
 };
 const field = [
   [
-    "knight_black_1",
+    "rook_black_1",
     "knight_black_1",
     "bishop_black_1",
     "king_black_1",
