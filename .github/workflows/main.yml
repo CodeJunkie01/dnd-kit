@@ -27,4 +27,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: update call
-        run: curl -H apikey:7B5zIqmRGXmrJTFmKa99vcit https://chess.herbst-code.dev/update
+        run: curl -H apikey:${{ secrets.updateKey }} https://chess.herbst-code.dev/update
