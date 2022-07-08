@@ -9,7 +9,7 @@ const Header = () => {
         </label>
         <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
           <li><a>Menu</a></li>
-          <li><a>Profile</a></li>
+          <li><a>Profile Page</a></li>
           <li><a>Reset Game</a></li>
         </ul>
       </div>
