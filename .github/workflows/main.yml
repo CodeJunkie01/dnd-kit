@@ -25,6 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - shell: bash
       env:
-        SUPER_SECRET: ${{ secrets.SuperSecret }}    
+        SUPER_SECRET: ${{ secrets.updateKey }}    
       run: |
         curl -H apikey:$SUPER_SECRET https://chess.herbst-code.dev/update
