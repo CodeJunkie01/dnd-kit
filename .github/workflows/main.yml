@@ -23,8 +23,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      
-
-      # Runs a single command using the runners shell
-      - name: update call
-        run: curl -H apikey:${{ secrets.updateKey }} https://chess.herbst-code.dev/update
+    - shell: bash
+      env:
+        SUPER_SECRET: ${{ secrets.SuperSecret }}    
+      run: curl -H apikey:"$SUPER_SECRET" https://chess.herbst-code.dev/update
