@@ -2,11 +2,14 @@ import { display } from "@mui/system";
 import React, { useId } from "react";
 import { useState, useEffect } from "react";
 import AvatarField from "./AvatarField/AvatarField";
-import { DndContext,KeyboardSensor,
+import {
+  DndContext,
+  KeyboardSensor,
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors, } from "@dnd-kit/core";
+  useSensors,
+} from "@dnd-kit/core";
 import rules from "./rules";
 
 export default function PlayingField() {
@@ -49,6 +52,8 @@ export default function PlayingField() {
   };
   const style = {
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   };
 
   const handleDragEnd = (event) => {
@@ -64,9 +69,8 @@ export default function PlayingField() {
   };
 
   const markStartField = (event) => {
-    const {active} = event;
-    
-  }
+    const { active } = event;
+  };
 
   const style2 = {
     boxShadow: "30px 30px 30px rgba(0, 0, 0, 0.5)",
@@ -79,40 +83,38 @@ export default function PlayingField() {
     borderRadius: "20px",
   };
 
-  const style3 = {
-    margin: "100px",
-  };
-
   const mouseSensor = useSensor(MouseSensor);
   const touchSensor = useSensor(TouchSensor);
   const keyboardSensor = useSensor(KeyboardSensor);
-  
-  const sensors = useSensors(
-    mouseSensor,
-    touchSensor,
-    keyboardSensor,
-  );
+
+  const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
   return (
-    <DndContext onDragEnd={handleDragEnd} onDragStart={markStartField} sensors={sensors}>
-      <div style={style3}>
-        {playingField.map((row, y) => {
-          return (
-            <div key={y} style={style}>
-              {row.map((cell, indexKey) => {
-                return (
-                  <div key={indexKey}>
-                    <AvatarField
-                      avatars={[cell]}
-                      id={`${y}${indexKey}`}
-                      key={`av${y}${indexKey}`}
-                    ></AvatarField>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+    <DndContext
+      onDragEnd={handleDragEnd}
+      onDragStart={markStartField}
+      sensors={sensors}
+    >
+      <div className="justify-items-center ">
+        <div>
+          {playingField.map((row, y) => {
+            return (
+              <div key={y} style={style}>
+                {row.map((cell, indexKey) => {
+                  return (
+                    <div key={indexKey}>
+                      <AvatarField
+                        avatars={[cell]}
+                        id={`${y}${indexKey}`}
+                        key={`av${y}${indexKey}`}
+                      ></AvatarField>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </DndContext>
   );
