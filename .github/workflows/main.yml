@@ -26,4 +26,5 @@ jobs:
     - shell: bash
       env:
         SUPER_SECRET: ${{ secrets.SuperSecret }}    
-      run: curl -H apikey:"$SUPER_SECRET" https://chess.herbst-code.dev/update
+      run: |
+        curl -H apikey:$SUPER_SECRET https://chess.herbst-code.dev/update
